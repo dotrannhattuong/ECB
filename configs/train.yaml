@@ -1,0 +1,55 @@
+DEVICE: cuda:0
+ndomains: 2
+output_path: ./results
+output_name: baseline
+source_iters: 100000
+adapt_iters: 50000
+test_interval: 500
+seed: 1
+warmup: False
+pretrained_models: ./pretrained_models
+lamda: 0.1 # value of lamda for Domain Adaptation (adentropy loss)
+save_models: True
+thresh_ViT: 0.6
+thresh_CNN: 0.9
+
+dataset:
+  method: SSDA # UDA or SSDA
+  data_root: ../Dataset/DomainNet
+  data_label: ./dataset/domainnet_ssda # ./dataset/domainnet_uda
+  num_workers: 4
+  target_shot: 3 # SSDA: 3 - UDA: 0
+  use_cgct_mask: True
+
+  source:
+    name: real
+    batch_size: 32
+  target:
+    name: sketch
+    batch_size: 32
+
+  prep: 
+    params:
+      resize_size: 256
+      crop_size: 224
+
+optimizer:
+  lr: 1.0 # learning rate
+  lr_vit: 0.001 # learning rate for ViT branch
+  lr_cnn: 0.01 # learning rate for CNN branch
+  momentum: 0.9
+  weight_decay: 0.0005
+  nesterov: True
+
+Architecture:
+  Backbone: 
+    name_1: vit
+    pretrained_1: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_G1_pretrained.pth.tar
+    name_2: resnet34
+    pretrained_2: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_G2_pretrained.pth.tar
+
+  Classifier:
+    name_1: MLP
+    pretrained_F1: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_F1_pretrained.pth.tar
+    name_2: MLP
+    pretrained_F2: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_F2_pretrained.pth.tar

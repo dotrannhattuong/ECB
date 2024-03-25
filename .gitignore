@@ -1,0 +1,13 @@
+/results
+/logs*
+/pretrained_models
+__pycache__/
+*.pyc
+model/ViG/__pycache__/pyramid_vig.cpython-38.pyc
+*.mp4
+*.pth
+*.pth.tar
+*.jpg
+*.png
+/test/*
+/backuplog/*
