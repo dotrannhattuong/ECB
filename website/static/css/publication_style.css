@@ -1,0 +1,194 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #24292f;
+}
+
+a {
+  color: #0563bb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #067ded;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+h3 {
+  color:#371ec5
+}
+
+::-moz-selection { color: #fff;  background: #218bff; }
+::selection      { color: #fff;  background: #218bff; }
+
+.co-first, .co-author {
+  margin: 0;
+  padding: 0;
+  color: red;
+  display: contents;
+}
+
+/*--------------------------------------------------------------
+# table
+--------------------------------------------------------------*/
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 2px solid black;
+}
+th, td {
+  text-align: center;
+}
+td {
+  width: 20%;
+}
+
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  color: #45505b;
+}
+.section-title h2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: #ddd;
+  bottom: 1px;
+  left: calc(50% - 60px);
+}
+.section-title h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #0563bb;
+  bottom: 0;
+  left: calc(50% - 20px);
+}
+.section-title p {
+  margin-bottom: 0;
+}
+
+
+/* video {
+  width:100%;
+  max-width:640px;
+  height:auto;
+} */
+video {
+  width:100%;
+  max-width:640px;
+  height:auto;
+}
+
+
+/*--------------------------------------------------------------
+# Publication Sections General
+--------------------------------------------------------------*/
+
+.publication .publication-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.publication .publication-title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  /*text-transform: uppercase;*/
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  color: #24292f;
+}
+.publication .publication-title h2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: #ddd;
+  bottom: 1px;
+  left: calc(50% - 60px);
+}
+.publication .publication-title h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #0563bb;
+  bottom: 0;
+  left: calc(50% - 20px);
+}
+.publication .publication-title h4 {
+  line-height: 21px;
+  font-size: 17px;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 10px;
+  color: #000;
+}
+.publication .publication-title h6 {
+  line-height: 16px;
+  font-size: 15px;
+  /* font-family: "Poppins", sans-serif; */
+  margin-bottom: 14px;
+  color: #000;
+}
+
+.publication .publication-detail {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.publication .publication-detail h3 {
+  font-weight: 700;
+  font-size: 26px;
+  color: #4749ec;
+}
+.publication .publication-detail p {
+  margin-bottom: 0;
+  text-align: justify;
+}
+
+.publication code {
+  color: #000;
+  background-color: #eff1f3; /*#eee;*/
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  border-radius: 5px;
+  padding: 2px 2px 2px 5px;
+}
+
+.publication pre {
+  color: #000;
+  background-color: #f6f8fa; /*#eee;*/
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  border-radius: 5px;
+  padding: 10px 10px 10px 15px;
+  text-align: left
+}
