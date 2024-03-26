@@ -5,20 +5,20 @@ This repository contains the code of the ECB method for Classification in Domain
 <br>Accepted In IEEE/CVF Conference on Computer Vision and Pattern Recognition (<a href="https://cvpr.thecvf.com/Conferences/2024/">CVPR 2024</a>).
 
 <a href="/">Paper</a> | 
-<a href="/">Project Page</a> | 
+<a href="https://dotrannhattuong.github.io/ECB/website/">Project Page</a> | 
 
 ## Proposed Method 
 <br/>
 <!-- <div style="display:flex; background: #fff; align-item:center;">
 <figure id="method" style="margin-right:0px">
-    <img src="./images/method_1.svg" />
+    <img src="https://github.com/dotrannhattuong/ECB/images/method_1.svg" />
 </figure>
 <figure id="method_2">
-<img src="./images/method_2.svg" />
+<img src="https://github.com/dotrannhattuong/ECB/images/method_2.svg" />
 </figure> -->
 
 <figure id="method" style="background: #fff; padding:10px; margin:0px">
-    <img src="./images/method_1.svg" style=""/>
+    <img src="./images/method_1.png" style=""/>
     
 </figure>
 <br/>
@@ -54,29 +54,14 @@ python test.py --cfg configs/test.yaml
 
 ## Visualization
 * The visualization compares features from two networks (CNN, ViT) for the <b><i>real --> sketch</i></b>  on the <b>DomainNet</b> dataset in the 3-shot scenario, before and after adaptation with the FTC strategy.
-<div class="figure*" style="display:flex; background: #fff; align-item:center;">
-    <figure id="visualize_tsne_a" style="padding:2px;margin:0px;">
-        <img src="./images/cnn_before.svg" />
-        <p style='color: #000; text-align:center; line-height:1px; padding-top: 10px;' > (a) </p>
-    </figure>   
-    <figure id="visualize_tsne_b" style="padding:2px;margin:0px;">
-        <img src="./images/vit_before.svg" />
-        <p style='color: #000; text-align:center; line-height:1px; padding-top: 10px;' > (b) </p>
-    </figure>
-    <figure id="visualize_tsne_c" style="padding:2px;margin:0px;">
-        <img src="./images/cnn_wo_FTC.svg" />
-        <p style='color: #000; text-align:center; line-height:1px; padding-top: 10px;' > (c) </p>
-    </figure>
-    <figure id="visualize_tsne_d" style="padding:2px;margin:0px;">
-        <img src="./images/cnn.svg" />
-        <p style='color: #000; text-align:center; line-height:1px; padding-top: 10px;' > (d) </p>
-    </figure>
-</div>
+<figure id="gradcam" style="background: #fff; margin:0px; text-align: center; padding:10px 0px">
+    <img src="./images/tsne.png" />
+</figure>
 <br />
 
 * The visualization in a few samples using GRAD-CAM technique to show to performance for CNN and ViT when applying ECB method.
 <figure id="gradcam" style="background: #fff; margin:0px; text-align: center; padding:10px 0px">
-    <img src="./images/gradcam.png" />
+    <img src="./images/grad_cam.png" />
 </figure>
 
 ## Citation
