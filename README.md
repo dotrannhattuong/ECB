@@ -5,18 +5,13 @@ This repository contains the code of the ECB method for Classification in Domain
 <br>Accepted In IEEE/CVF Conference on Computer Vision and Pattern Recognition (<a href="https://cvpr.thecvf.com/Conferences/2024/">CVPR 2024</a>).
 
 <a href="/">Paper</a> | 
-<a href="https://dotrannhattuong.github.io/ECB/website/">Project Page</a> | 
+<a href="/">Suppl</a> | 
+<a href="https://arxiv.org/abs/2403.18360">arxiv</a> | 
+<a href="https://dotrannhattuong.github.io/ECB/website/">Project Page</a> |
+<a href="https://www.youtube.com/">Youtube</a> | 
 
 ## Proposed Method 
 <br/>
-<!-- <div style="display:flex; background: #fff; align-item:center;">
-<figure id="method" style="margin-right:0px">
-    <img src="https://github.com/dotrannhattuong/ECB/images/method_1.svg" />
-</figure>
-<figure id="method_2">
-<img src="https://github.com/dotrannhattuong/ECB/images/method_2.svg" />
-</figure> -->
-
 <figure id="method" style="background: #fff; padding:10px; margin:0px">
     <img src="./images/method_1.png" style=""/>
     
@@ -25,7 +20,6 @@ This repository contains the code of the ECB method for Classification in Domain
 
 * <b><i>Supervised Training:</i></b> We train both ViT and CNN branches on labeled samples.
 * <b><i>Finding To Conquering Strategy (FTC):</i></b> We find class-specific boundaries based on the fixed ViT Encoder E1 by maximizing discrepancy between the Classifier F1 and F2. Subsequently, the CNN Encoder E2 clusters the target features based on those class-specific boundaris by minimizing discrepancy.
-<!-- * <b><i>Co-training Training: </i></b> We apply co-training to exchange effectively knowledge between two branches on unlabeled samples , the ViT branch E1 generates a pseudo label for weakly unlabeled samples to teach the CNN branch E2 with strongly unlabeled samples. -->
 
 ## Prepare
 ### Dataset
