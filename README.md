@@ -6,20 +6,14 @@ This repository contains the code of the ECB method for Classification in Domain
 
 <div align="center">
 
-[![PWC](https://img.shields.io/badge/CVPR%202024-PDF-blue)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
-[![PWC](https://img.shields.io/badge/CVPR%202024-Supp-7DCBFF)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
-[![PWC](https://img.shields.io/badge/arXiv-2403.18360-b31b1b)](https://arxiv.org/abs/2403.18360)
-[![PWC](https://img.shields.io/badge/CVPR%202024-Project%20Page-0047ab)](https://dotrannhattuong.github.io/ECB/website/)
-[![PWC](https://img.shields.io/badge/CVPR%202024-Youtube-ff0000)](https://www.youtube.com/)
-[![PWC](https://img.shields.io/badge/CVPR%202024-Bibtex-CB8CEA)](#citation)
+[![PWC](https://img.shields.io/badge/PDF-blue)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
+[![PWC](https://img.shields.io/badge/Supp-7DCBFF)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
+[![PWC](https://img.shields.io/badge/ArXiv-b31b1b)](https://arxiv.org/abs/2403.18360)
+[![PWC](https://img.shields.io/badge/Project%20Page-0047ab)](https://dotrannhattuong.github.io/ECB/website/)
+[![PWC](https://img.shields.io/badge/Presentation-ff0000)](https://www.youtube.com/)
+[![PWC](https://img.shields.io/badge/Bibtex-CB8CEA)](#citation)
 
 </div>
-
-<!-- <a href="/">Paper</a> | 
-<a href="/">Suppl</a> | 
-<a href="">arxiv</a> | 
-<a href="https://dotrannhattuong.github.io/ECB/website/">Project Page</a> |
-<a href="https://www.youtube.com/">Youtube</a> |  -->
 
 ## Proposed Method 
 <br/>
