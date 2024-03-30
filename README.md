@@ -4,11 +4,22 @@ This repository contains the code of the ECB method for Classification in Domain
 > Ba-Hung Ngo*, Nhat-Tuong Do-Tran*, Tuan-Ngoc Nguyen, Hae-Gon Jeon and Tae Jong Choi† 
 <br>Accepted In IEEE/CVF Conference on Computer Vision and Pattern Recognition (<a href="https://cvpr.thecvf.com/Conferences/2024/">CVPR 2024</a>).
 
-<a href="/">Paper</a> | 
+<div align="center">
+
+[![PWC](https://img.shields.io/badge/CVPR%202024-PDF-blue)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
+[![PWC](https://img.shields.io/badge/CVPR%202024-Supp-7DCBFF)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
+[![PWC](https://img.shields.io/badge/arXiv-2403.18360-b31b1b)](https://arxiv.org/abs/2403.18360)
+[![PWC](https://img.shields.io/badge/CVPR%202024-Project%20Page-0047ab)](https://dotrannhattuong.github.io/ECB/website/)
+[![PWC](https://img.shields.io/badge/CVPR%202024-Youtube-ff0000)](https://www.youtube.com/)
+[![PWC](https://img.shields.io/badge/CVPR%202024-Bibtex-CB8CEA)](#citation)
+
+</div>
+
+<!-- <a href="/">Paper</a> | 
 <a href="/">Suppl</a> | 
-<a href="https://arxiv.org/abs/2403.18360">arxiv</a> | 
+<a href="">arxiv</a> | 
 <a href="https://dotrannhattuong.github.io/ECB/website/">Project Page</a> |
-<a href="https://www.youtube.com/">Youtube</a> | 
+<a href="https://www.youtube.com/">Youtube</a> |  -->
 
 ## Proposed Method 
 <br/>
@@ -23,7 +34,7 @@ This repository contains the code of the ECB method for Classification in Domain
 
 ## Prepare
 ### Dataset
-Please follow the instructions in [https://github.com/dotrannhattuong/ECB/dataset/DATASET.md](DATASET.md) to download datasets.
+Please follow the instructions in [DATASET.md](./dataset/DATASET.md) to download datasets.
 
 ### Installation
 ```bash
@@ -41,7 +52,7 @@ python train.py --cfg configs/train.yaml
 sh download_pretrain.sh
 ```
 
-* For evaluation, you need to modify the configuration arguments in test/yaml in the configs folder. These arguments are described in [https://github.com/dotrannhattuong/ECB/configs/CONFIG.md](CONFIG.md)
+* For evaluation, you need to modify the configuration arguments in test/yaml in the configs folder. These arguments are described in [CONFIG.md](./configs/CONFIG.md)
 ```bash
 python test.py --cfg configs/test.yaml
 ```
@@ -58,6 +69,7 @@ python test.py --cfg configs/test.yaml
     <img src="./images/grad_cam.png" />
 </figure>
 
+<a name="citation"></a>
 ## Citation
 ```
 @inproceedings{,
