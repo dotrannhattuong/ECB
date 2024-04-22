@@ -123,13 +123,6 @@ def build_config(config):
     ##### CLASSIFIER CONFIG #####
     classifier_setting = config_architecture["Classifier"]
 
-
-    if config["pretrained_models"]:
-        print(config["pretrained_models"])
-    else:
-        print("KO co")
-    a
-
     if backbone_setting["pretrained_1"] and classifier_setting["pretrained_F1"]:
         pass
     
