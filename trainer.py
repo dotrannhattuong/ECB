@@ -24,13 +24,14 @@ def evaluate(G1, G2, F1, F2, dset_loaders, **kwargs):
     )
 
     source_test_result, target_val_result = {}, {}
+    kwargs["return_pseduo"] = False
+    # source_test_result = eval_domain(G1, G2, F1, F2, dset_loaders['source_test'], **kwargs)
+    
+    # log_str += "CNN's Accuracy Source Test = {:<05.4f}%  ViT's Accuracy Source Test = {:.4f}% \n".format(
+    #     source_test_result["cnn_accuracy"], source_test_result["vit_accuracy"]
+    # )
+    
     if method == "SSDA":
-        kwargs["return_pseduo"] = False
-        # source_test_result = eval_domain(G1, G2, F1, F2, dset_loaders['source_test'], **kwargs)
-        # log_str += "CNN's Accuracy Source Test = {:<05.4f}%  ViT's Accuracy Source Test = {:.4f}% \n".format(
-        #     source_test_result["cnn_accuracy"], source_test_result["vit_accuracy"]
-        # )
-
         target_val_result = eval_domain(
             G1, G2, F1, F2, dset_loaders["target_val"], **kwargs
         )
@@ -437,9 +438,9 @@ def train(config, G1, G2, F1, F2, dset_loaders):
         ### Print log ###
         if step % 20 == 0 or step == config["adapt_iters"] - 1:
             log_str = (
-                "Iters: ({}/{}) \n  -- lr_g1= {:<10.6f} lr_g2= {:<10.6f}\n"
-                "  -- CNN's loss= {:<10.6f} ViT's Loss= {:<10.6f}\n"
-                "  -- loss_vit_to_cnn= {:<10.6f} loss_cnn_to_vit= {:<10.6f} \n".format(
+                "Iters: ({}/{}) \t lr_g1 = {:<10.6f} lr_g2 = {:<10.6f} "
+                "CNN's loss = {:<10.6f} ViT's Loss = {:<10.6f} "
+                "loss_vit_to_cnn = {:<10.6f} loss_cnn_to_vit = {:<10.6f} \n".format(
                     step,
                     config["adapt_iters"],
                     lr_g1,
@@ -522,7 +523,7 @@ def train(config, G1, G2, F1, F2, dset_loaders):
             # Define log_str to save log
             log_str = f"  -- Domain task [{source_name} --> {target_name}]: \n"
             if the_best_acc_vit_source != 0.0 or the_best_acc_cnn_source != 0:
-                log_str += "\t-- The best CNN's Acc Source Test= {:<05.4f}% The best Vit's Acc Source Test= {:<05.4f}% \n".format(
+                log_str += "\t-- The best CNN's Acc Source Test = {:<05.4f}% The best Vit's Acc Source Test = {:<05.4f}% \n".format(
                     the_best_acc_cnn_source, the_best_acc_vit_source
                 )
             if the_best_acc_cnn_val != 0.0 or the_best_acc_vit_val != 0:
@@ -531,9 +532,9 @@ def train(config, G1, G2, F1, F2, dset_loaders):
                 )
 
             log_str += (
-                "\t-- The best CNN's Acc Target Test= {:<05.4f}% The best ViT's Acc Target Test= {:<05.4f}% \n"
-                "\t-- Acc_Pseudo_Labels_CNN= {:<05.4f} Correct_Pseudo_Labels_CNN= {} Total_Pseudo_Labels_CNN= {:<10} \n"
-                "\t-- Acc_Pseudo_Labels_ViT= {:<05.4f} Correct_Pseudo_Labels_ViT= {} Total_Pseudo_Labels_ViT= {:<10} \n".format(
+                "\t-- The best CNN's Acc Target Test = {:<05.4f}% The best ViT's Acc Target Test = {:<05.4f}% \n"
+                "\t-- Acc_Pseudo_Labels_CNN = {:<05.4f} Correct_Pseudo_Labels_CNN = {} Total_Pseudo_Labels_CNN = {:<10} \n"
+                "\t-- Acc_Pseudo_Labels_ViT = {:<05.4f} Correct_Pseudo_Labels_ViT = {} Total_Pseudo_Labels_ViT = {:<10} \n".format(
                     eval_result["cnn_acc_target_test"],
                     eval_result["vit_acc_target_test"],
                     eval_result["pl_acc_cnn"],
