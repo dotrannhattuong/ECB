@@ -28,7 +28,7 @@ dataset:
     name: sketch
     batch_size: 32
 
-  prep: 
+  prep:
     params:
       resize_size: 256
       crop_size: 224
@@ -44,12 +44,12 @@ optimizer:
 Architecture:
   Backbone: 
     name_1: vit
-    pretrained_1: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_G1_pretrained.pth.tar
+    pretrained_1: 
     name_2: resnet34
-    pretrained_2: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_G2_pretrained.pth.tar
+    pretrained_2: 
 
   Classifier:
     name_1: MLP
-    pretrained_F1: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_F1_pretrained.pth.tar
+    pretrained_F1: 
     name_2: MLP
-    pretrained_F2: /mnt/HDD1/tuong/workspace/FTC/pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_F2_pretrained.pth.tar
+    pretrained_F2: 

@@ -194,5 +194,5 @@ def build_model(config, DEVICE, pretrain = True):
         G2 = load_pretrain(G2, backbone_setting['pretrained_2'], device=DEVICE, init_weight=False)
         F1 = load_pretrain(F1, classifier_setting['pretrained_F1'], device=DEVICE)
         F2 = load_pretrain(F2, classifier_setting['pretrained_F2'], device=DEVICE)
-        ########################3
+        #########################
     return G1, G2, F1, F2

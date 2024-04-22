@@ -7,7 +7,7 @@ adapt_iters: 50000
 test_interval: 500
 seed: 1
 warmup: False
-pretrained_models: ./pretrained_models
+pretrained_models: 
 lamda: 0.1 # value of lamda for Domain Adaptation (adentropy loss)
 save_models: True
 thresh_ViT: 0.6
@@ -44,12 +44,12 @@ optimizer:
 Architecture:
   Backbone: 
     name_1: vit
-    pretrained_1: ./pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_G1_pretrained.pth.tar
+    pretrained_1: ./results/domainnet_ssda/real_to_sketch_SSDA_3_baseline/the_best_G1.pth.tar
     name_2: resnet34
-    pretrained_2: ./pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_G2_pretrained.pth.tar
+    pretrained_2: ./results/domainnet_ssda/real_to_sketch_SSDA_3_baseline/the_best_G2.pth.tar
 
   Classifier:
     name_1: MLP
-    pretrained_F1: ./pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_F1_pretrained.pth.tar
+    pretrained_F1: ./results/domainnet_ssda/real_to_sketch_SSDA_3_baseline/the_best_F1.pth.tar
     name_2: MLP
-    pretrained_F2: ./pretrained_models/real_to_sketch_SSDA_3_pretrained_warmup/the_best_F2_pretrained.pth.tar
+    pretrained_F2: ./results/domainnet_ssda/real_to_sketch_SSDA_3_baseline/the_best_F2.pth.tar

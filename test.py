@@ -3,7 +3,7 @@ import argparse
 import trainer as trainer
 from model.basenet import build_model
 from utils.dataloader import build_data
-from utils.utils import build_config, set_seed
+from utils.utils import build_config, set_seed, write_logs
 
 
 def parse_opt(known=False):
@@ -52,17 +52,18 @@ def main(args):
     )
 
     local_acc_target_test, global_acc_target_test = (
-        test_target_res["local_accuracy"],
-        test_target_res["global_accuracy"],
+        test_target_res["cnn_accuracy"],
+        test_target_res["vit_accuracy"],
     )
 
     log_str = (
-        "Domain task [{}-->{}]: \n"
-        "Local Accuracy Target Test = {:.4f}%, \t Global Accuracy Target Test = {:.4f}% \n".format(
+        "\n============ TESTING ============"
+        "\n-- Domain task [{} --> {}]: "
+        "\n\t-- The best CNN's Acc Target Test= {:<05.4f}% The best ViT's Acc Target Test= {:<05.4f}% \n".format(
             source_name, target_name, local_acc_target_test, global_acc_target_test
         )
     )
-    print(log_str)
+    write_logs(config['out_file'], log_str)
 
 
 if __name__ == "__main__":

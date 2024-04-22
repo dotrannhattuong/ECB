@@ -17,7 +17,7 @@ def evaluate(G1, G2, F1, F2, dset_loaders, **kwargs):
     target_name = kwargs.get("target_name", "sketch")
     out_file = kwargs.get("out_file", None)
 
-    log_str = f"Domain task [{source_name} --> {target_name}] \n"
+    log_str = f"  -- Domain task [{source_name} --> {target_name}] \n"
 
     target_test_result = eval_domain(
         G1, G2, F1, F2, dset_loaders["target_test"], **kwargs
@@ -25,21 +25,21 @@ def evaluate(G1, G2, F1, F2, dset_loaders, **kwargs):
 
     source_test_result, target_val_result = {}, {}
     if method == "SSDA":
+        kwargs["return_pseduo"] = False
         # source_test_result = eval_domain(G1, G2, F1, F2, dset_loaders['source_test'], **kwargs)
         # log_str += "CNN's Accuracy Source Test = {:<05.4f}%  ViT's Accuracy Source Test = {:.4f}% \n".format(
         #     source_test_result["cnn_accuracy"], source_test_result["vit_accuracy"]
         # )
 
-        kwargs["return_pseduo"] = False
         target_val_result = eval_domain(
             G1, G2, F1, F2, dset_loaders["target_val"], **kwargs
         )
 
-        log_str += "CNN's Accuracy Target Val  = {:<05.4f}%  ViT's Accuracy Target Val =  {:.4f}% \n".format(
+        log_str += "\t-- CNN's Accuracy Target Val  = {:<05.4f}%  ViT's Accuracy Target Val =  {:.4f}% \n".format(
             target_val_result["cnn_accuracy"], target_val_result["vit_accuracy"]
         )
 
-    log_str += "CNN's Accuracy Target Test = {:<05.4f}%  ViT's Accuracy Target Test = {:.4f}% \n".format(
+    log_str += "\t-- CNN's Accuracy Target Test = {:<05.4f}%  ViT's Accuracy Target Test = {:.4f}% \n".format(
         target_test_result["cnn_accuracy"], target_test_result["vit_accuracy"]
     )
 
@@ -257,13 +257,13 @@ def train(config, G1, G2, F1, F2, dset_loaders):
     the_best_acc_vit_source = 0.0
     the_best_acc_cnn_test = 0.0
     the_best_acc_vit_test = 0.0
+    the_best_acc_cnn_val = 0.0
+    the_best_acc_vit_val = 0.0
     ####################
 
     ### Check SSDA to define target label ###
     if method == "SSDA":
         len_target_labeled = len(dset_loaders["target_label"])
-        the_best_acc_cnn_val = 0.0
-        the_best_acc_vit_val = 0.0
 
     ### Set lr ###
     param_lr_g1 = []
@@ -345,7 +345,6 @@ def train(config, G1, G2, F1, F2, dset_loaders):
         unlabeled_target_input = torch.cat((inputs_target_w, inputs_target_str), 0)
         labeled_input = torch.cat(labeled_targetw_tuple, 0)
         labeled_gt = torch.cat(labeled_gt, 0)
-
         #######################
 
         zero_grad_all()
@@ -438,9 +437,9 @@ def train(config, G1, G2, F1, F2, dset_loaders):
         ### Print log ###
         if step % 20 == 0 or step == config["adapt_iters"] - 1:
             log_str = (
-                "Iters: ({}/{}) \t lr_g1 {:<10.6f} lr_g2 {:<10.6f}"
-                "CNN's loss: {:<10.6f} ViT's Loss: {:<10.6f}"
-                "loss_vit_to_cnn: {:<10.6f} loss_cnn_to_vit: {:<10.6f} \n".format(
+                "Iters: ({}/{}) \n  -- lr_g1= {:<10.6f} lr_g2= {:<10.6f}\n"
+                "  -- CNN's loss= {:<10.6f} ViT's Loss= {:<10.6f}\n"
+                "  -- loss_vit_to_cnn= {:<10.6f} loss_cnn_to_vit= {:<10.6f} \n".format(
                     step,
                     config["adapt_iters"],
                     lr_g1,
@@ -472,8 +471,8 @@ def train(config, G1, G2, F1, F2, dset_loaders):
             eval_result = evaluate(G1, G2, F1, F2, dset_loaders, **eval_kwargs)
 
             ### Evaluation for Source test ###
-            cnn_acc_source = eval_result.get("cnn_acc_source_val", 0.0)
-            vit_acc_source = eval_result.get("vit_acc_source_val", 0.0)
+            cnn_acc_source = eval_result.get("cnn_acc_source", 0.0)
+            vit_acc_source = eval_result.get("vit_acc_source", 0.0)
             if cnn_acc_source > the_best_acc_cnn_source:
                 the_best_acc_cnn_source = cnn_acc_source
             if vit_acc_source > the_best_acc_vit_source:
@@ -495,7 +494,7 @@ def train(config, G1, G2, F1, F2, dset_loaders):
 
                 ### Save model ###
                 if config["save_models"]:
-                    write_logs(out_file, "Save CNN Branch\n")
+                    write_logs(out_file, f"  -- Saved CNN Branch (G2 + F2) at {config['output_path']}")
                     torch.save(
                         G2.state_dict(),
                         os.path.join(config["output_path"], "the_best_G2.pth.tar"),
@@ -510,7 +509,7 @@ def train(config, G1, G2, F1, F2, dset_loaders):
 
                 ### Save model ###
                 if config["save_models"]:
-                    write_logs(out_file, "Save ViT Branch\n")
+                    write_logs(out_file, f"  -- Saved ViT Branch (G1 + F1) at {config['output_path']}")
                     torch.save(
                         G1.state_dict(),
                         os.path.join(config["output_path"], "the_best_G1.pth.tar"),
@@ -521,20 +520,20 @@ def train(config, G1, G2, F1, F2, dset_loaders):
                     )
 
             # Define log_str to save log
-            log_str = f"Domain task [{source_name} --> {target_name}]: \n"
+            log_str = f"  -- Domain task [{source_name} --> {target_name}]: \n"
             if the_best_acc_vit_source != 0.0 or the_best_acc_cnn_source != 0:
-                log_str += "The best CNN's Acc Source Test = {:<05.4f}% The best Vit's Acc Source Test = {:<05.4f}% \n".format(
+                log_str += "\t-- The best CNN's Acc Source Test= {:<05.4f}% The best Vit's Acc Source Test= {:<05.4f}% \n".format(
                     the_best_acc_cnn_source, the_best_acc_vit_source
                 )
             if the_best_acc_cnn_val != 0.0 or the_best_acc_vit_val != 0:
-                log_str += "The best CNN's Acc Target Val  = {:<05.4f}% The best Vit's Acc Target Val  = {:<05.4f}% \n".format(
+                log_str += "\t-- The best CNN's Acc Target Val = {:<05.4f}% The best Vit's Acc Target Val = {:<05.4f}% \n".format(
                     the_best_acc_cnn_val, the_best_acc_vit_val
                 )
 
             log_str += (
-                "The best CNN's Acc Target Test: {:<05.4f}% The best ViT's Acc Target Test: {:<05.4f}% \n"
-                "Acc_Pseudo_Labels_CNN: {:<05.4f} Correct_Pseudo_Labels_CNN: {:<10} Total_Pseudo_Labels_CNN: {:<10} \n"
-                "Acc_Pseudo_Labels_ViT: {:<05.4f} Correct_Pseudo_Labels_ViT: {:<10} Total_Pseudo_Labels_ViT: {:<10} \n".format(
+                "\t-- The best CNN's Acc Target Test= {:<05.4f}% The best ViT's Acc Target Test= {:<05.4f}% \n"
+                "\t-- Acc_Pseudo_Labels_CNN= {:<05.4f} Correct_Pseudo_Labels_CNN= {} Total_Pseudo_Labels_CNN= {:<10} \n"
+                "\t-- Acc_Pseudo_Labels_ViT= {:<05.4f} Correct_Pseudo_Labels_ViT= {} Total_Pseudo_Labels_ViT= {:<10} \n".format(
                     eval_result["cnn_acc_target_test"],
                     eval_result["vit_acc_target_test"],
                     eval_result["pl_acc_cnn"],
@@ -545,5 +544,5 @@ def train(config, G1, G2, F1, F2, dset_loaders):
                     eval_result["total_pl_vit"],
                 )
             )
-            write_logs(eval_kwargs["out_file"], log_str)
+            write_logs(eval_kwargs["out_file"], log_str, colors=True)
     return G1, G2, F1, F2

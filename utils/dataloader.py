@@ -77,7 +77,7 @@ class ImageList(Dataset):
         return len(self.imgs)
 
 
-def build_data(config, debug=False):
+def build_data(config, debug=True):
     dsets = {}
     dset_loaders = {}
 
@@ -137,16 +137,21 @@ def build_data(config, debug=False):
         )
 
     elif method == "UDA":
-        prefix = config.get("data_prefix", "")
-        image_set_file_s = os.path.join(data_label, source_name, prefix)
-        image_set_file_s_test = os.path.join(data_label, source_name, prefix)
+        prefix = config.get("data_prefix", {'train':'.txt', 'test': '.txt'})
+        image_set_file_s = os.path.join(data_label, source_name + prefix['train'])
+        image_set_file_s_test = os.path.join(data_label, source_name + prefix['test'])
 
-        image_set_file_tu = os.path.join(data_label, target_name, prefix)
-        image_set_file_tu_test = os.path.join(data_label, target_name, prefix)
+        image_set_file_tu = os.path.join(data_label, target_name + prefix['train'])
+        image_set_file_tu_test = os.path.join(data_label, target_name + prefix['test'])
 
     if debug:
         # debug here
-        pass
+        print("="*10, 'DATA PATH', "="*10)
+        print(f"source train: {image_set_file_s}")
+        print(f"source test: {image_set_file_s_test}")
+        print(f"target train: {image_set_file_tu}")
+        print(f"target test: {image_set_file_tu_test}")
+        print("="*30)
 
     ############## SOURCE DATA SET ##############
     dsets["source_train"] = ImageList(

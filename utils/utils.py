@@ -47,7 +47,7 @@ def build_config(config):
 
     # set number of classes
     config_data = config["dataset"]
-    config_data["name"] = config_data["data_root"].split("/")[-1].lower()
+    config_data["name"] = config_data["data_label"].split("/")[-1].lower()
     if "office31" in config_data["name"]:
         config["Architecture"]["class_num"] = 31
         
@@ -59,6 +59,7 @@ def build_config(config):
         
     elif "domainnet" in config_data["name"] and config_data["method"] == "UDA":
         config["Architecture"]["class_num"] = 40
+        config_data['data_prefix'] = {'train': '_train_mini.txt', 'test': '_test_mini.txt'}
         
     elif "pacs" in config_data["name"]:
         config["Architecture"]["class_num"] = 7
@@ -121,6 +122,13 @@ def build_config(config):
     backbone_setting = config_architecture["Backbone"]
     ##### CLASSIFIER CONFIG #####
     classifier_setting = config_architecture["Classifier"]
+
+
+    if config["pretrained_models"]:
+        print(config["pretrained_models"])
+    else:
+        print("KO co")
+    a
 
     if backbone_setting["pretrained_1"] and classifier_setting["pretrained_F1"]:
         pass
