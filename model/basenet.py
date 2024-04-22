@@ -82,7 +82,10 @@ def load_pretrain(model, pretrain_path, device='cpu', init_weight=True):
         model.load_state_dict(torch.load(pretrain_path, map_location=device), strict=True)
         print(f'Pretrain weights {model.__class__.__name__} loaded.')
     elif init_weight:
+        print(f"Weight Init: {model.__class__.__name__}")
         weights_init(model)
+    else:
+        print(f"Loading pretrain ImageNet: {model.__class__.__name__}")
     return model
 
 def build_model(config, DEVICE, pretrain = True):
@@ -145,7 +148,6 @@ def build_model(config, DEVICE, pretrain = True):
         G2 = timm.create_model(model_name='swin_base_patch4_window7_224.ms_in1k', pretrained=True)
 
     elif backbone_setting['name_2'] == 'coatnet-0':
-        print('G2 co-0')
         G2 = timm.create_model(model_name='coatnet_0_rw_224.sw_in1k', pretrained=True)
 
     elif backbone_setting['name_2'] == 'coatnet-2': 
@@ -190,9 +192,11 @@ def build_model(config, DEVICE, pretrain = True):
 
     if pretrain:
         ##### LOAD PRETRAIN #####
+        print("======== LOAD PRETRAIN ========")
         G1 = load_pretrain(G1, backbone_setting['pretrained_1'], device=DEVICE, init_weight=False)
         G2 = load_pretrain(G2, backbone_setting['pretrained_2'], device=DEVICE, init_weight=False)
         F1 = load_pretrain(F1, classifier_setting['pretrained_F1'], device=DEVICE)
         F2 = load_pretrain(F2, classifier_setting['pretrained_F2'], device=DEVICE)
+        print("===============================")
         #########################
     return G1, G2, F1, F2

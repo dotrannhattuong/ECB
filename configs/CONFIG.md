@@ -1,4 +1,13 @@
 # CONFIG
+**NOTE**:
+```bash
+* Priorities paths: warmup stage -> weights with ECB method -> pretrained_models.
+* If you want to train warmup: Set `warmup`: True.
+* Don't use any pretrained model: Set `pretrained_models` and pretrained backbone paths are blank.
+* Only use warmup pretrained model: Set `pretrained_models` is the folder contains the warmup pretrained model paths.
+* Use pretrained model that train with ECB method: Set four pretrained model paths. 
+```
+
 * Folowing is the config arguments and description in the config file.
 ``` bash
 Config
@@ -11,7 +20,7 @@ Config
 │  ├ test_interval: 500 # Evaluatate the model when iter step equal test_interval
 │  ├ seed: 1 # Controls randomness, making results repeatable for debugging and comparisons.
 │  ├ warmup: False # The Flag to train labeled samples (If True)
-│  ├ pretrained_models: ./pretrained_models # The Folder contains the pretrained models
+│  ├ pretrained_models: ./pretrained_models # The Folder contains the warmup pretrained models
 │  ├ lamda: 0.1 # value of lamda for Domain Adaptation (adentropy loss)
 │  ├ save_models: True # Save models when training or Not
 │  ├ thresh_ViT: 0.6 # The threshold for ViT branch when calculate Pseduo Label

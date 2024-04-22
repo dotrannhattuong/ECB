@@ -102,7 +102,7 @@ def build_config(config):
 
     if config["warmup"]:
         config["output_path"] = os.path.join(
-            config["output_path"],
+            config["pretrained_models"],
             config_data["name"],
             f"{source_name}_to_{target_name}_{method}_{config['output_name']}_warmup",
         )
@@ -123,7 +123,13 @@ def build_config(config):
     ##### CLASSIFIER CONFIG #####
     classifier_setting = config_architecture["Classifier"]
 
-    if backbone_setting["pretrained_1"] and classifier_setting["pretrained_F1"]:
+    if config["warmup"]:
+        backbone_setting["pretrained_1"] = ''
+        backbone_setting["pretrained_2"] = ''
+        classifier_setting["pretrained_F1"] = ''
+        classifier_setting["pretrained_F2"] = ''
+        
+    elif backbone_setting["pretrained_1"] and classifier_setting["pretrained_F1"]:
         pass
     
     elif config["pretrained_models"]:

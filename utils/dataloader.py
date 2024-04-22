@@ -151,7 +151,7 @@ def build_data(config, debug=True):
         print(f"source test: {image_set_file_s_test}")
         print(f"target train: {image_set_file_tu}")
         print(f"target test: {image_set_file_tu_test}")
-        print("="*30)
+        print("="*31)
 
     ############## SOURCE DATA SET ##############
     dsets["source_train"] = ImageList(
