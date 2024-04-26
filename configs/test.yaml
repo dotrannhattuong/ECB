@@ -1,4 +1,4 @@
-DEVICE: cuda:1
+DEVICE: cuda:0
 ndomains: 2
 output_path: ./results
 output_name: test
@@ -15,8 +15,8 @@ thresh_CNN: 0.9
 
 dataset:
   method: SSDA # UDA or SSDA
-  data_root: ../Dataset/DomainNet_UDA
-  data_label: ../Dataset/DomainNet_UDA/txt_SSDA
+  data_root: ../Dataset/DomainNet
+  data_label: ./dataset/domainnet_ssda # ./dataset/domainnet_uda
   num_workers: 4
   target_shot: 3
   use_cgct_mask: True

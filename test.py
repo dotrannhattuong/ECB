@@ -4,6 +4,8 @@ import trainer as trainer
 from model.basenet import build_model
 from utils.dataloader import build_data
 from utils.utils import build_config, set_seed, write_logs
+import os
+from log_utils.utils import ReDirectSTD
 
 
 def parse_opt(known=False):
@@ -22,6 +24,11 @@ def main(args):
 
     #########################
     config_data = config["dataset"]
+    log_file_name = os.path.join(
+        "./logs", config_data["name"], config["output_path"].split("/")[-1] + ".txt"
+    )
+    ReDirectSTD(log_file_name, "stdout", True)  # Check
+    
     dsets, dset_loaders = build_data(config_data)
 
     source_name = config["dataset"]["source"]["name"]
@@ -63,7 +70,7 @@ def main(args):
             source_name, target_name, local_acc_target_test, global_acc_target_test
         )
     )
-    write_logs(config['out_file'], log_str)
+    write_logs(config['out_file'], log_str, colors=True)
 
 
 if __name__ == "__main__":
