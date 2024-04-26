@@ -5,7 +5,7 @@ import PIL
 import PIL.ImageDraw
 import PIL.ImageEnhance
 import PIL.ImageOps
-
+import os
 
 def AutoContrast(img, _):
     return PIL.ImageOps.autocontrast(img)
@@ -171,12 +171,6 @@ class RandAugment:
 
 
 if __name__ == "__main__":
-    # randaug = RandAugment(3,5)
-    # print(randaug)
-    # for item in randaug.augment_list:
-    #     print(item)
-    import os
-
     os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
     img = PIL.Image.open("./u.jpg")
     randaug = RandAugment(3, 6)

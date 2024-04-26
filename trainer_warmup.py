@@ -24,13 +24,14 @@ def evaluate(G1, G2, F1, F2, dset_loaders, **kwargs):
     )
 
     source_test_result, target_val_result = {}, {}
-    if method == "SSDA":
-        source_test_result = eval_domain(G1, G2, F1, F2, dset_loaders['source_test'], **kwargs)
-        log_str += "CNN's Accuracy Source Test = {:<05.4f}%  ViT's Accuracy Source Test = {:.4f}% \n".format(
-            source_test_result["cnn_accuracy"], source_test_result["vit_accuracy"]
-        )
+    kwargs["return_pseduo"] = False
+    
+    source_test_result = eval_domain(G1, G2, F1, F2, dset_loaders['source_test'], **kwargs)
+    log_str += "CNN's Accuracy Source Test = {:<05.4f}%  ViT's Accuracy Source Test = {:.4f}% \n".format(
+        source_test_result["cnn_accuracy"], source_test_result["vit_accuracy"]
+    )
         
-        kwargs["return_pseduo"] = False
+    if method == "SSDA":
         target_val_result = eval_domain(
             G1, G2, F1, F2, dset_loaders["target_val"], **kwargs
         )
@@ -359,18 +360,17 @@ def train_labeled_data(config, G1, G2, F1, F2, dset_loaders):
                 "device": DEVICE,
                 "source_name": source_name,
                 "target_name": target_name,
-                "out_file": config["out_file"],
-                
+                "out_file": config["out_file"],                
                 # for eval_domain function
-                "return_pseduo": True,
+                "return_pseduo": False,
                 "thresh_cnn": config["thresh_CNN"],
                 "thresh_vit": config["thresh_ViT"],
             }
             eval_result = evaluate(G1, G2, F1, F2, dset_loaders, **eval_kwargs)
 
             ### Evaluation for Source test ###
-            cnn_acc_source = eval_result.get("cnn_acc_source_val", 0.0)
-            vit_acc_source = eval_result.get("vit_acc_source_val", 0.0)
+            cnn_acc_source = eval_result.get("cnn_acc_source", 0.0)
+            vit_acc_source = eval_result.get("vit_acc_source", 0.0)
             if cnn_acc_source > the_best_acc_cnn_source:
                 the_best_acc_cnn_source = cnn_acc_source
             if vit_acc_source > the_best_acc_vit_source:
@@ -432,8 +432,8 @@ def train_labeled_data(config, G1, G2, F1, F2, dset_loaders):
                 "The best CNN's Acc Target Test: {:<05.4f}% The best ViT's Acc Target Test: {:<05.4f}% \n"
                 "Acc_Pseudo_Labels_CNN: {:<05.4f} Correct_Pseudo_Labels_CNN: {:<10} Total_Pseudo_Labels_CNN: {:<10} \n"
                 "Acc_Pseudo_Labels_ViT: {:<05.4f} Correct_Pseudo_Labels_ViT: {:<10} Total_Pseudo_Labels_ViT: {:<10} \n".format(
-                    eval_result["cnn_acc_target_test"],
-                    eval_result["vit_acc_target_test"],
+                    the_best_acc_cnn_test,
+                    the_best_acc_vit_test,
                     eval_result["pl_acc_cnn"],
                     eval_result["correct_pl_cnn"],
                     eval_result["total_pl_cnn"],
@@ -442,5 +442,5 @@ def train_labeled_data(config, G1, G2, F1, F2, dset_loaders):
                     eval_result["total_pl_vit"],
                 )
             )
-            write_logs(eval_kwargs["out_file"], log_str)
+            write_logs(eval_kwargs["out_file"], log_str, colors=True)
     return G1, G2, F1, F2

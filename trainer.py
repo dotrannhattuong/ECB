@@ -130,7 +130,7 @@ def eval_domain(G1, G2, F1, F2, test_loader, **kwargs):
 
     ##### Compute Pseudo Label information #####
     if return_pseduo:
-
+        
         def get_pseduo_label_info(confidences_all, predict, labels, thresh):
             confidences = torch.cat(confidences_all, dim=0)
             masks_bool = confidences > thresh
@@ -535,8 +535,8 @@ def train(config, G1, G2, F1, F2, dset_loaders):
                 "\t-- The best CNN's Acc Target Test = {:<05.4f}% The best ViT's Acc Target Test = {:<05.4f}% \n"
                 "\t-- Acc_Pseudo_Labels_CNN = {:<05.4f} Correct_Pseudo_Labels_CNN = {} Total_Pseudo_Labels_CNN = {:<10} \n"
                 "\t-- Acc_Pseudo_Labels_ViT = {:<05.4f} Correct_Pseudo_Labels_ViT = {} Total_Pseudo_Labels_ViT = {:<10} \n".format(
-                    eval_result["cnn_acc_target_test"],
-                    eval_result["vit_acc_target_test"],
+                    the_best_acc_cnn_test,
+                    the_best_acc_vit_test,
                     eval_result["pl_acc_cnn"],
                     eval_result["correct_pl_cnn"],
                     eval_result["total_pl_cnn"],

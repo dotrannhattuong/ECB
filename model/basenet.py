@@ -88,6 +88,7 @@ def load_pretrain(model, pretrain_path, device='cpu', init_weight=True):
         print(f"Loading pretrain ImageNet: {model.__class__.__name__}")
     return model
 
+
 def build_model(config, DEVICE, pretrain = True):
     config = copy.deepcopy(config)
 
@@ -140,8 +141,7 @@ def build_model(config, DEVICE, pretrain = True):
     G1 = G1.to(DEVICE)
     ######################
 
-    ##### BACKBONE 2 #####
-     
+    ##### BACKBONE 2 #####     
     if backbone_setting['name_2'] == 'vit':
         G2 = timm.create_model(model_name='vit_base_patch16_224', pretrained=True)
     elif backbone_setting['name_2'] == 'swin':

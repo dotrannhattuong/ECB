@@ -193,7 +193,7 @@ def preprocess(resize_size=256, crop_size=224):
 
 
 ### Transform based on ASDA ###
-def train_weak_asda(
+def train_weak(
     resize_size=256,
     crop_size=224,
     mean=[0.485, 0.456, 0.406],
@@ -212,7 +212,7 @@ def train_weak_asda(
     )
 
 
-def source_train_strong_asda(
+def source_train_strong(
     resize_size=256,
     crop_size=224,
     mean=[0.485, 0.456, 0.406],
@@ -232,7 +232,7 @@ def source_train_strong_asda(
     )
 
 
-def target_train_strong_asda(
+def target_train_strong(
     resize_size=256,
     crop_size=224,
     mean=[0.485, 0.456, 0.406],
@@ -253,7 +253,7 @@ def target_train_strong_asda(
     )
 
 
-def image_test_asda(resize_size=256, crop_size=224):
+def image_test(resize_size=256, crop_size=224):
     return transforms.Compose(
         [
             ResizeImage(resize_size),
@@ -264,7 +264,7 @@ def image_test_asda(resize_size=256, crop_size=224):
     )
 
 
-def image_val_asda(resize_size=256, crop_size=224):
+def image_val(resize_size=256, crop_size=224):
     return transforms.Compose(
         [
             ResizeImage(resize_size),

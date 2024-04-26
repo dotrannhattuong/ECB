@@ -18,16 +18,6 @@ def set_seed(seed=1024):
     torch.backends.cudnn.deterministic = True
 
 
-def normalize(array):
-    # Calculate the minimum and maximum values along axis 0 (columns)
-    min_vals = np.min(array, axis=0)
-    max_vals = np.max(array, axis=0)
-
-    # Normalize the array to the range [0, 1] along each column
-    normalized_array = (array - min_vals) / (max_vals - min_vals)
-    return normalized_array
-
-
 def load_config(file_path):
     """
     Load config from yml/yaml file.
@@ -77,16 +67,16 @@ def build_config(config):
 
     ### DATA AUGMENTATION - ASDA ###
     config_data["prep"] = {
-        "source_w": preprocess.train_weak_asda(**config_data["prep"]["params"]),
-        "source_str": preprocess.source_train_strong_asda(
+        "source_w": preprocess.train_weak(**config_data["prep"]["params"]),
+        "source_str": preprocess.source_train_strong(
             **config_data["prep"]["params"]
         ),
-        "target_w": preprocess.train_weak_asda(**config_data["prep"]["params"]),
-        "target_str": preprocess.target_train_strong_asda(
+        "target_w": preprocess.train_weak(**config_data["prep"]["params"]),
+        "target_str": preprocess.target_train_strong(
             **config_data["prep"]["params"]
         ),
-        "test": preprocess.image_test_asda(**config_data["prep"]["params"]),
-        "val": preprocess.image_val_asda(**config_data["prep"]["params"]),
+        "test": preprocess.image_test(**config_data["prep"]["params"]),
+        "val": preprocess.image_val(**config_data["prep"]["params"]),
     }
     ################################
 
