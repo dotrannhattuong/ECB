@@ -434,7 +434,7 @@ class ReDirectSTD(object):
     lazily -- if no message is written, the dir and file will not be created.
   """
 
-  def __init__(self, fpath=None, console='stdout', immediately_visible=False):
+  def __init__(self, fpath=None, console='stdout', immediately_visible=False, continue_write = True):
     import sys
     import os
     import os.path as osp
@@ -443,6 +443,7 @@ class ReDirectSTD(object):
     self.console = sys.stdout if console == 'stdout' else sys.stderr
     self.file = fpath
     self.f = None
+    self.continue_write = continue_write
     self.immediately_visible = immediately_visible
     if fpath is not None:
       # Remove existing log file.
@@ -464,14 +465,17 @@ class ReDirectSTD(object):
   def __exit__(self, *args):
     self.close()
 
+  def set_continue_write(self, continue_write):
+    self.continue_write = continue_write
+
   def write(self, msg):
     self.console.write(msg)
     if self.file is not None:
       may_make_dir(os.path.dirname(osp.abspath(self.file)))
-      if self.immediately_visible:
+      if self.immediately_visible and self.continue_write:
         with open(self.file, 'a') as f:
           f.write(msg)
-      else:
+      elif not self.immediately_visible:
         if self.f is None:
           self.f = open(self.file, 'w')
         self.f.write(msg)
@@ -484,7 +488,8 @@ class ReDirectSTD(object):
       os.fsync(self.f.fileno())
 
   def close(self):
-    self.console.close()
+    # self.console.close()
+    self.flush()
     if self.f is not None:
       self.f.close()
 

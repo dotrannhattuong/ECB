@@ -18,31 +18,36 @@ def parse_opt(known=False):
 
 
 def main(args):
+    ### Load the config file ###
     config = build_config(args.cfg)
+    out_file = config['out_file']
+    write_logs(out_file, str(config))
+    
     DEVICE = config["DEVICE"]
     set_seed(config["seed"])
+    ############################
 
-    #########################
     config_data = config["dataset"]
+    
+    ### Create a new log file for warmup (logs/..._test.txt) ###
     log_file_name = os.path.join(
         "./logs", config_data["name"], config["output_path"].split("/")[-1] + ".txt"
     )
-    ReDirectSTD(log_file_name, "stdout", True)  # Check
+    ReDirectSTD(log_file_name, "stdout", True) 
+    ############################################################
     
+    ### Get config ###
+    # Get data config
     dsets, dset_loaders = build_data(config_data)
-
     source_name = config["dataset"]["source"]["name"]
     target_name = config["dataset"]["target"]["name"]
-    ####################
 
-    ### get model ###
+    # get model config
     config_architecture = config["Architecture"]
     G1, G2, F1, F2 = build_model(config_architecture, DEVICE=DEVICE)
-    #################
+    ##################
 
-    #################
-    ### Testing  ####
-    #################
+    ### Testing stage ####    
     eval_kwargs = {
         # for evauation function
         "method": config_data["method"],
@@ -54,6 +59,7 @@ def main(args):
         "thresh_vit": config["thresh_ViT"],
     }
 
+    # Evaluate the model on the target test set
     test_target_res = trainer.eval_domain(
         G1, G2, F1, F2, dset_loaders["target_test"], **eval_kwargs
     )
@@ -63,14 +69,18 @@ def main(args):
         test_target_res["vit_accuracy"],
     )
 
+    # Define the log string
     log_str = (
         "\n============ TESTING ============"
         "\n-- Domain task [{} --> {}]: "
-        "\n\t-- The best CNN's Acc Target Test= {:<05.4f}% The best ViT's Acc Target Test= {:<05.4f}% \n".format(
+        "\n  -- The best CNN's Acc Target Test = {:<05.4f}% The best ViT's Acc Target Test = {:<05.4f}% \n".format(
             source_name, target_name, local_acc_target_test, global_acc_target_test
         )
     )
-    write_logs(config['out_file'], log_str, colors=True)
+    
+    # Write the log string to the log file
+    write_logs(out_file, log_str, colors=True)
+    ######################
 
 
 if __name__ == "__main__":
