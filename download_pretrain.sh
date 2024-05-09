@@ -1,11 +1,8 @@
 mkdir -p pretrained_models
 cd pretrained_models
-# pretrain for ViT Encoder E1
-# wget 
 
-# pretrain for CNN Encoder E2
-# wget
+# SSDA: real to clipart 3 shots
+wget https://github.com/dotrannhattuong/ECB/releases/download/v0/real_to_clipart_SSDA_3_baseline.zip
 
-# pretrain for Classifier F1 and F2
-# wget
-# wget
+# SSDA: real to clipart 3 shots
+wget https://github.com/dotrannhattuong/ECB/releases/download/v0/real_to_sketch_SSDA_3_baseline.zip

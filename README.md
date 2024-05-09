@@ -10,7 +10,7 @@ This repository contains the code of the ECB method for Classification in Domain
 [![PWC](https://img.shields.io/badge/Supp-7DCBFF)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
 [![PWC](https://img.shields.io/badge/ArXiv-b31b1b)](https://arxiv.org/abs/2403.18360)
 [![PWC](https://img.shields.io/badge/Project%20Page-0047ab)](https://dotrannhattuong.github.io/ECB/website/)
-[![PWC](https://img.shields.io/badge/Presentation-ff0000)](https://www.youtube.com/)
+[![PWC](https://img.shields.io/badge/Presentation-ff0000)](https://www.youtube.com/watch?v=ZYAhJLIkR_4)
 [![PWC](https://img.shields.io/badge/Bibtex-CB8CEA)](#citation)
 
 </div>
