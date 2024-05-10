@@ -115,7 +115,8 @@ def build_model(config, DEVICE, pretrain = True):
         G1 = timm.create_model(model_name='swinv2_base_window16_256.ms_in1k', pretrained=True)
         
     elif backbone_setting['name_1'] == 'clip':
-        G1 = CustomCLIPModel(name = 'ViT-B/32', device=DEVICE)
+        # G1 = CustomCLIPModel(name = 'ViT-B/32', device=DEVICE)
+        G1 = timm.create_model(model_name='timm/vit_base_patch32_clip_224.openai', pretrained=True)   
         inc_1 = 512
         
     elif backbone_setting['name_1'] == 'resnet34':
@@ -157,7 +158,8 @@ def build_model(config, DEVICE, pretrain = True):
         G2 = timm.create_model(model_name='swinv2_base_window16_256.ms_in1k', pretrained=True)
 
     elif backbone_setting['name_2'] == 'clip':
-        G2 = CustomCLIPModel(name = 'ViT-B/32', device=DEVICE)
+        # G2 = CustomCLIPModel(name = 'ViT-B/32', device=DEVICE)
+        G2 = timm.create_model(model_name='timm/vit_base_patch32_clip_224.openai', pretrained=True)
         inc_2 = 512    
         
     elif backbone_setting['name_2'] == 'resnet34':
