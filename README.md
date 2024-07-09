@@ -6,8 +6,8 @@ This repository contains the code of the ECB method for Classification in Domain
 
 <div align="center">
 
-[![PWC](https://img.shields.io/badge/PDF-blue)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
-[![PWC](https://img.shields.io/badge/Supp-7DCBFF)](https://cvpr.thecvf.com/Conferences/2024/AcceptedPapers)
+[![PWC](https://img.shields.io/badge/PDF-blue)](https://openaccess.thecvf.com/content/CVPR2024/papers/Ngo_Learning_CNN_on_ViT_A_Hybrid_Model_to_Explicitly_Class-specific_CVPR_2024_paper.pdf)
+[![PWC](https://img.shields.io/badge/Supp-7DCBFF)](https://openaccess.thecvf.com/content/CVPR2024/supplemental/Ngo_Learning_CNN_on_CVPR_2024_supplemental.pdf)
 [![PWC](https://img.shields.io/badge/ArXiv-b31b1b)](https://arxiv.org/abs/2403.18360)
 [![PWC](https://img.shields.io/badge/Project%20Page-0047ab)](https://dotrannhattuong.github.io/ECB/website/)
 [![PWC](https://img.shields.io/badge/Presentation-ff0000)](https://www.youtube.com/watch?v=ZYAhJLIkR_4)
