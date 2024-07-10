@@ -66,10 +66,12 @@ python test.py --cfg configs/test.yaml
 <a name="citation"></a>
 ## Citation
 ```
-@inproceedings{,
-  title={Learning CNN on ViT: A Hybrid Model to Explicitly Class-specific Boundaries for Domain Adaptation},
-  author={},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2024}
+@InProceedings{
+    author    = {Ngo, Ba Hung and Do-Tran, Nhat-Tuong and Nguyen, Tuan-Ngoc and Jeon, Hae-Gon and Choi, Tae Jong},
+    title     = {Learning CNN on ViT: A Hybrid Model to Explicitly Class-specific Boundaries for Domain Adaptation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {28545-28554}
 }
 ```
