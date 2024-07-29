@@ -1,0 +1,80 @@
+DEVICE: cuda:0
+ndomains: 2
+output_path: ./results
+output_name: baseline
+source_iters: 100000
+adapt_iters: 50000
+test_interval: 500
+seed: 1
+warmup: False
+pretrained_models: 
+lamda: 0.1 # value of lamda for Domain Adaptation (adentropy loss)
+save_models: True
+thresh_ViT: 0.6
+thresh_CNN: 0.9
+
+dataset:
+  method: SSDA # UDA or SSDA
+  data_root: ../Dataset/DomainNet
+  data_label: dataset/domainnet_ssda
+  num_workers: 4
+  target_shot: 3
+  use_cgct_mask: True
+
+  source:
+    name: real
+    batch_size: 32
+  target:
+    name: clipart
+    batch_size: 32
+
+  prep: 
+    test_10crop: False
+    params:
+      resize_size: 256
+      crop_size: 224
+
+Optimizer:
+  name: SGD
+  optim_params:
+    lr: 0.0005 # learning rate
+    momentum: 0.9
+    weight_decay: 0.0005
+    nesterov: True
+  lr_type: inv
+  lr_param:
+    lr: 0.0005
+    gamma: 0.001
+    power: 0.75
+
+Architecture:
+  Backbone: 
+    name_1: vit
+    pretrained_1:
+    name_2: resnet34
+    pretrained_2: 
+
+  Classifier:
+    name_1: MLP
+    pretrained_F1:
+    name_2: MLP
+    pretrained_F2:
+
+Visualize:
+  DATASET:
+    base_path: ''
+
+  GRAD-CAM:
+    method: GradCAM
+    image_size: 224
+    output: None
+    use_cuda: True
+    targets: None #[ClassifierOutputTarget(128)]
+    aug_smooth: True
+    eigen_smooth: True
+
+  PLOT:
+    figsize: (20, 15)
+    id_show: 1
+    num_class_to_plot: 20
+    row_plot: 5
