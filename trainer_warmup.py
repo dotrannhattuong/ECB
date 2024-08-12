@@ -362,12 +362,12 @@ def train_labeled_data(config, G1, G2, F1, F2, dset_loaders):
         ##################################
 
         ### Print log ###
-        if step % 20 == 0 or step == config["adapt_iters"] - 1:
+        if step % 20 == 0 or step == config["source_iters"] - 1:
             log_str = (
                 "Iters: ({}/{}) \t lr_g1 {:<10.6f} lr_g2 {:<10.6f}"
                 "CNN's loss: {:<10.6f} ViT's Loss: {:<10.6f} \n".format(
                     step,
-                    config["adapt_iters"],
+                    config["source_iters"],
                     lr_g1,
                     lr_g2,
                     cnn_loss.item(),
