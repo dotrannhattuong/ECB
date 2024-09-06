@@ -56,9 +56,14 @@ def build_config(config):
     elif "pacs" in config_data["name"]:
         config["Architecture"]["class_num"] = 7
         
-    elif "geo" in config_data["name"]:
+    elif "geoimnet" in config_data["name"]:
         config["Architecture"]["class_num"] = 600
-        
+        config_data['data_prefix'] = {'train': '_train.txt', 'test': '_test.txt'}
+
+    elif "geoplaces" in config_data["name"]:
+        config["Architecture"]["class_num"] = 204
+        config_data['data_prefix'] = {'train': '_train.txt', 'test': '_test.txt'}
+
     elif "visda" in config_data["name"]:
         config["Architecture"]["class_num"] = 12
         

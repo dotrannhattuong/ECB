@@ -259,13 +259,13 @@ def train_labeled_data(config, G1, G2, F1, F2, dset_loaders):
     the_best_acc_vit_source = 0.0
     the_best_acc_cnn_test = 0.0
     the_best_acc_vit_test = 0.0
+    the_best_acc_cnn_val = 0.0
+    the_best_acc_vit_val = 0.0
     ####################
 
     ### Check SSDA to define target label ###
     if method == "SSDA":
         len_target_labeled = len(dset_loaders["target_label"])
-        the_best_acc_cnn_val = 0.0
-        the_best_acc_vit_val = 0.0
     #########################################
 
     ### Set lr ###
