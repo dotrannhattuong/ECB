@@ -75,3 +75,5 @@ python test.py --cfg configs/test.yaml
     pages     = {28545-28554}
 }
 ```
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
